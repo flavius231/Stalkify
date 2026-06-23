@@ -1,0 +1,27 @@
+# CMake generation dependency list for this directory.
+D:/Stalkify/CMakeLists.txt
+D:/Stalkify/build/CMakeFiles/4.4.0-rc2/CMakeCCompiler.cmake
+D:/Stalkify/build/CMakeFiles/4.4.0-rc2/CMakeRCCompiler.cmake
+D:/Stalkify/build/CMakeFiles/4.4.0-rc2/CMakeSystem.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeCInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeCommonLanguageInclude.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeGenericSystem.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeInitializeConfigs.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeLanguageInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeRCInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeSystemSpecificInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/CMakeSystemSpecificInitialize.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Compiler/MSVC-C.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Compiler/MSVC.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Internal/CMakeCLinkerInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Internal/CMakeCommonLinkerInformation.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Linker/MSVC-C.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Linker/MSVC.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Linker/Windows-MSVC-C.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Linker/Windows-MSVC.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Windows-Initialize.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Windows-MSVC-C.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Windows-MSVC.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/Windows.cmake
+D:/UpdateLaptop/share/cmake-4.4/Modules/Platform/WindowsPaths.cmake

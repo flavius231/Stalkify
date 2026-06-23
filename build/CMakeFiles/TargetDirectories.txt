@@ -1,0 +1,3 @@
+D:/Stalkify/build/CMakeFiles/server.dir
+D:/Stalkify/build/CMakeFiles/ALL_BUILD.dir
+D:/Stalkify/build/CMakeFiles/ZERO_CHECK.dir

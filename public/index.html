@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stalkify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#002266',
+                        secundar: '#004de6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #001133; overflow: hidden; }
+        .search-active { transform: translateY(-35vh); }
+    </style>
+</head>
+<body class="relative h-screen w-full">
+
+    <header class="absolute top-0 left-0 w-full p-6 flex justify-between items-start z-50">
+        <div class="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:bg-gray-100 transition shadow-sm">
+            <img src="logo-nb.png" alt="Logo" class="w-full h-full object-contain">
+        </div>
+        <button class="bg-secundar text-white px-8 py-3 rounded-full font-bold hover:bg-principal transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            Login
+        </button>
+    </header>
+
+    <main class="h-full w-full flex items-center justify-center">
+        <div id="search-wrapper" class="w-full max-w-3xl px-6 transition-transform duration-700 ease-in-out">
+            <div class="relative flex items-center w-full h-20 rounded-full bg-white shadow-xl border-4 border-principal overflow-hidden hover:shadow-2xl transition-shadow">
+                <input type="text" id="search-input" class="w-full h-full outline-none text-2xl text-principal pl-8 pr-24 bg-transparent placeholder-gray-400 font-medium" placeholder="Pe cine urmarim azi?" autocomplete="off"/>
+                <button class="absolute right-2 w-14 h-14 bg-secundar rounded-full flex items-center justify-center text-white hover:bg-principal transition-colors shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+            <div id="search-results" class="mt-8 w-full opacity-0 transition-opacity duration-700"></div>
+        </div>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchWrapper = document.getElementById('search-wrapper');
+        const searchResults = document.getElementById('search-results');
+
+        searchInput.addEventListener('focus', () => {
+            searchWrapper.classList.add('search-active');
+            setTimeout(() => { searchResults.classList.remove('opacity-0'); }, 300);
+        });
+
+        searchInput.addEventListener('blur', () => {
+            if(searchInput.value.trim() === '') {
+                searchResults.classList.add('opacity-0');
+                searchWrapper.classList.remove('search-active');
+            }
+        });
+    </script>
+</body>
+</html>

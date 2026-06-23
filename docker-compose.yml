@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  baza_de_date_mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: parola_mea_secreta
+    ports:
+      - "3307:3306" # AM MODIFICAT AICI: 3307 pentru Windows, 3306 in interiorul Docker-ului
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
