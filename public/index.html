@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,51 +19,103 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #001133; overflow: hidden; }
-        .search-active { transform: translateY(-35vh); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #001133;
+            overflow: hidden;
+        }
+
+        .search-active {
+            transform: translateY(-35vh);
+        }
     </style>
 </head>
+
 <body class="relative h-screen w-full">
 
     <header class="absolute top-0 left-0 w-full p-6 flex justify-between items-start z-50">
-        <div class="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:bg-gray-100 transition shadow-sm">
+        <div
+            class="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:bg-gray-100 transition shadow-sm">
             <img src="logo-nb.png" alt="Logo" class="w-full h-full object-contain">
         </div>
-        <button class="bg-secundar text-white px-8 py-3 rounded-full font-bold hover:bg-principal transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+        <button
+            class="bg-secundar text-white px-8 py-3 rounded-full font-bold hover:bg-principal transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             Login
         </button>
     </header>
 
     <main class="h-full w-full flex items-center justify-center">
-        <div id="search-wrapper" class="w-full max-w-3xl px-6 transition-transform duration-700 ease-in-out">
+      <div id="search-wrapper" class="relative w-full max-w-3xl px-6 transition-transform duration-700 ease-in-out z-40">
             <div class="relative flex items-center w-full h-20 rounded-full bg-white shadow-xl border-4 border-principal overflow-hidden hover:shadow-2xl transition-shadow">
-                <input type="text" id="search-input" class="w-full h-full outline-none text-2xl text-principal pl-8 pr-24 bg-transparent placeholder-gray-400 font-medium" placeholder="Pe cine urmarim azi?" autocomplete="off"/>
-                <button class="absolute right-2 w-14 h-14 bg-secundar rounded-full flex items-center justify-center text-white hover:bg-principal transition-colors shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <input type="text" id="search-input" class="w-full h-full outline-none text-2xl text-principal pl-8 pr-24 bg-transparent placeholder-gray-400 font-medium relative z-10" placeholder="Pe cine urmarim azi?" autocomplete="off"/>
+                
+                <button id="search-btn" class="absolute right-2 w-14 h-14 bg-secundar rounded-full flex items-center justify-center text-white hover:bg-principal transition-colors shadow-md z-20 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 font-bold pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
             </div>
-            <div id="search-results" class="mt-8 w-full opacity-0 transition-opacity duration-700"></div>
+            
+            <div id="search-results" class="absolute top-24 left-6 right-6 opacity-0 transition-opacity duration-700"></div>
         </div>
+    </main>
+    <div id="search-results" class="absolute top-24 left-6 right-6 opacity-0 transition-opacity duration-700"></div>
+</div>
     </main>
 
     <script>
         const searchInput = document.getElementById('search-input');
         const searchWrapper = document.getElementById('search-wrapper');
         const searchResults = document.getElementById('search-results');
+        const searchBtn = document.getElementById('search-btn'); // Am adaugat butonul
 
+        // Animațiile tale originale
         searchInput.addEventListener('focus', () => {
             searchWrapper.classList.add('search-active');
             setTimeout(() => { searchResults.classList.remove('opacity-0'); }, 300);
         });
 
         searchInput.addEventListener('blur', () => {
-            if(searchInput.value.trim() === '') {
-                searchResults.classList.add('opacity-0');
-                searchWrapper.classList.remove('search-active');
+            // Am scos partea care ascunde rezultatele automat cand dai click in afara, 
+            // ca sa poti citi rezultatele returnate de server
+        });
+
+        // Functia care trimite datele la serverul C
+        function efectueazaCautarea() {
+            const username = searchInput.value.trim();
+            if (username === '') return;
+
+            // Afisam un mesaj de incarcare cat timp C-ul cauta in baza de date
+            searchResults.innerHTML = '<p class="text-white text-xl font-medium text-center">Cautam in baza de date...</p>';
+
+            // Facem apelul catre serverul de C pe ruta /search
+            fetch(`http://localhost:8080/search?username=${username}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Afisam exact ce ne-a trimis serverul inapoi
+                    searchResults.innerHTML = `
+                    <div class="bg-white p-6 rounded-2xl shadow-2xl border border-gray-200">
+                        <h3 class="text-principal text-lg font-bold mb-2">Rezultat server:</h3>
+                        <p class="text-gray-700">${data}</p>
+                    </div>
+                `;
+                })
+                .catch(error => {
+                    console.error('Eroare:', error);
+                    searchResults.innerHTML = '<p class="text-red-500 text-xl font-medium text-center">Eroare la conectarea cu serverul. Verifica daca programul in C este pornit.</p>';
+                });
+        }
+
+        // Declansam cautarea cand se apasa pe buton
+        searchBtn.addEventListener('click', efectueazaCautarea);
+
+        // Declansam cautarea si cand se apasa tasta "Enter" in casuta de text
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                efectueazaCautarea();
             }
         });
     </script>
 </body>
+
 </html>
